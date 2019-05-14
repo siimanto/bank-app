@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->job(new RunAllIbParserJob(0))->everyMinute();
+        $schedule->job(new RunAllIbParserJob(1))->dailyAt(config('mantoServices.cron_bank_daily'));
     }
 
     /**
